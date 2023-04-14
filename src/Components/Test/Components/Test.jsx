@@ -21,7 +21,7 @@ import { Suspense } from "react";
 // import {Envior}
 // import { Color } from "three";
 
-// import * as THREE from "three";
+import * as THREE from "three";
 
 import studio from "@theatre/studio";
 import extension from "@theatre/r3f/dist/extension";
@@ -198,70 +198,70 @@ const BillBOardGroup = () => {
     </>
   );
 };
-// let GlowBox = ({ position = [1, 5, 2], args = [6, 6, 6] }) => {
-//   let emissive = "#A11F9E";
-//   let glow = "#A11F9E";
+let GlowBox = ({ position = [1, 5, 2], args = [6, 6, 6] }) => {
+  let emissive = "#A11F9E";
+  let glow = "#A11F9E";
 
-//   let size = 4;
-//   let scale = size * 1.2;
-//   let near = -25;
-//   let far = 100;
-//   let color = glow || emissive;
-//   return (
-//     <>
-//       <mesh scale={1} position={position}>
-//         <boxGeometry args={args} />
+  let size = 4;
+  let scale = size * 1.2;
+  let near = -25;
+  let far = 100;
+  let color = glow || emissive;
+  return (
+    <>
+      <mesh scale={1} position={position}>
+        <boxGeometry args={args} />
 
-//         <LayerMaterial
-//           // transparent
-//           color="#A11F9E"
-//           depthWrite={false}
-//           blending={THREE.CustomBlending}
-//           blendEquation={THREE.AddEquation}
-//           blendSrc={THREE.SrcAlphaFactor}
-//           blendDst={THREE.DstAlphaFactor}
-//         >
-//           <Depth
-//             colorA={color}
-//             colorB="#A11F9E"
-//             alpha={1}
-//             mode="normal"
-//             near={near * scale}
-//             far={far * scale}
-//             origin={[0, 0, 0]}
-//           />
-//           <Depth
-//             colorA={color}
-//             colorB="#A11F9E"
-//             alpha={0.5}
-//             mode="add"
-//             near={-40 * scale}
-//             far={far * 1.2 * scale}
-//             origin={[0, 0, 0]}
-//           />
-//           {/* <Depth
-//             colorA={color}
-//             colorB="black"
-//             alpha={1}
-//             mode="add"
-//             near={-15 * scale}
-//             far={far * 0.7 * scale}
-//             origin={[0, 0, 0]}
-//           /> */}
-//           {/* <Depth
-//             colorA={color}
-//             colorB="black"
-//             alpha={1}
-//             mode="add"
-//             near={-10 * scale}
-//             far={far * 0.68 * scale}
-//             origin={[0, 0, 0]}
-//           /> */}
-//         </LayerMaterial>
-//       </mesh>
-//     </>
-//   );
-// };
+        <LayerMaterial
+          // transparent
+          color="#A11F9E"
+          depthWrite={false}
+          blending={THREE.CustomBlending}
+          blendEquation={THREE.AddEquation}
+          blendSrc={THREE.SrcAlphaFactor}
+          blendDst={THREE.DstAlphaFactor}
+        >
+          <Depth
+            colorA={color}
+            colorB="#A11F9E"
+            alpha={1}
+            mode="normal"
+            near={near * scale}
+            far={far * scale}
+            origin={[0, 0, 0]}
+          />
+          <Depth
+            colorA={color}
+            colorB="#A11F9E"
+            alpha={0.5}
+            mode="add"
+            near={-40 * scale}
+            far={far * 1.2 * scale}
+            origin={[0, 0, 0]}
+          />
+          {/* <Depth
+            colorA={color}
+            colorB="black"
+            alpha={1}
+            mode="add"
+            near={-15 * scale}
+            far={far * 0.7 * scale}
+            origin={[0, 0, 0]}
+          /> */}
+          {/* <Depth
+            colorA={color}
+            colorB="black"
+            alpha={1}
+            mode="add"
+            near={-10 * scale}
+            far={far * 0.68 * scale}
+            origin={[0, 0, 0]}
+          /> */}
+        </LayerMaterial>
+      </mesh>
+    </>
+  );
+};
 const Test = () => {
   const [changing, setIsChanging] = useState(false);
   const ref = useRef(null);
@@ -318,8 +318,8 @@ const Test = () => {
           <ScrollControls pages={5} infinite={true} damping={0}>
             <SheetProvider sheet={sheet}>
               <Scene />
-              {/* <GlowBox position={[7, 0, 0]} args={[0.2, 0.2, 400]} />
-            <GlowBox position={[-7, 0, 0]} args={[0.2, 0.2, 400]} /> */}
+              <GlowBox position={[7, 0, 0]} args={[0.2, 0.2, 400]} />
+              <GlowBox position={[-7, 0, 0]} args={[0.2, 0.2, 400]} />
             </SheetProvider>
           </ScrollControls>
         </Canvas>
