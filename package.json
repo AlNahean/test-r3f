@@ -1,0 +1,27 @@
+{
+  "name": "rebels-revolt",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@react-three/drei": "^9.65.3",
+    "@react-three/fiber": "^8.12.1",
+    "@react-three/postprocessing": "^2.7.1",
+    "@studio-freight/lenis": "^1.0.6",
+    "@theatre/core": "^0.6.0",
+    "@theatre/r3f": "^0.6.0",
+    "@theatre/studio": "^0.6.0",
+    "bootstrap": "^5.2.3",
+    "lamina": "^1.1.23",
+    "next": "13.3.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "sass": "^1.62.0",
+    "three": "^0.151.3"
+  }
+}
