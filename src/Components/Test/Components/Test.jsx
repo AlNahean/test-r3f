@@ -38,13 +38,13 @@ import { getProject, val } from "@theatre/core";
 import flyThroughState from "./state.json";
 import Header from "./Header";
 
-import {
-  EffectComposer,
-  DepthOfField,
-  Bloom,
-  Noise,
-  Vignette,
-} from "@react-three/postprocessing";
+// import {
+//   EffectComposer,
+//   DepthOfField,
+//   Bloom,
+//   Noise,
+//   Vignette,
+// } from "@react-three/postprocessing";
 
 // import {
 //   SheetProvider,
@@ -308,9 +308,9 @@ const Test = () => {
         {/* <ambientLight color={0x000000} />
         <directionalLight color={0x000000} /> */}
 
-        <EffectComposer>
+        {/* <EffectComposer>
           <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={300} />
-        </EffectComposer>
+        </EffectComposer> */}
 
         <ScrollControls pages={7} infinite={true} damping={0}>
           <SheetProvider sheet={sheet}>
