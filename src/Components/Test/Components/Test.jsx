@@ -273,53 +273,58 @@ const Test = () => {
     return 1 - Math.cos((x * Math.PI) / 2);
   }
   useEffect(() => {
-    const lenis = new Lenis({
-      duration: 2.5,
-      // easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-      easing: easeInSine(2),
-      wrapper: ref.current,
-      infinite: true,
-      smoothWheel: true,
-    });
+    if (ref.current) {
+      const lenis = new Lenis({
+        duration: 2.5,
+        // easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+        easing: easeInSine(2),
+        wrapper: ref.current,
+        infinite: true,
+        smoothWheel: true,
+      });
 
-    function raf(time) {
-      lenis.raf(time);
+      function raf(time) {
+        lenis.raf(time);
+        requestAnimationFrame(raf);
+      }
+
       requestAnimationFrame(raf);
     }
 
-    requestAnimationFrame(raf);
-
     return () => {};
-  }, []);
+  }, [ref.current]);
 
   return (
     <div style={{}} className=" home-page-wrapper">
       {/* <Header /> */}
 
-      <Canvas
-        ref={ref}
-        gl={{ preserveDrawingBuffer: true }}
-        style={{ height: "100vh", width: "100%", backgroundColor: "black" }}
-      >
-        <fog attach="fog" args={["#202025", 0, 80]} />
-        {/* <OrbitControls /> */}
-        {/* <color attach="background" color="red" /> */}
+      <Suspense fallback={<div>Loading.....</div>}>
+        <Canvas
+          ref={ref}
+          gl={{ preserveDrawingBuffer: true }}
+          style={{ height: "100vh", width: "100%", backgroundColor: "black" }}
+        >
+          <fog attach="fog" args={["#202025", 0, 80]} />
+          {/* <OrbitControls /> */}
+          {/* <color attach="background" color="red" /> */}
 
-        {/* <ambientLight color={0x000000} />
+          {/* <ambientLight color={0x000000} />
         <directionalLight color={0x000000} /> */}
 
-        {/* <EffectComposer>
+          {/* <EffectComposer>
           <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={300} />
         </EffectComposer> */}
 
-        <ScrollControls pages={7} infinite={true} damping={0}>
-          <SheetProvider sheet={sheet}>
-            <Scene />
-            {/* <GlowBox position={[7, 0, 0]} args={[0.2, 0.2, 400]} />
+          <ScrollControls pages={5} infinite={true} damping={0}>
+            <SheetProvider sheet={sheet}>
+              <Scene />
+              {/* <GlowBox position={[7, 0, 0]} args={[0.2, 0.2, 400]} />
             <GlowBox position={[-7, 0, 0]} args={[0.2, 0.2, 400]} /> */}
-          </SheetProvider>
-        </ScrollControls>
-      </Canvas>
+            </SheetProvider>
+          </ScrollControls>
+        </Canvas>
+      </Suspense>
+
       <Loader />
     </div>
   );
