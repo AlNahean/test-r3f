@@ -319,7 +319,7 @@ function Scene() {
                 intensity={1}
                 // decay={100}
                 distance={15}
-                color={"purple"}
+                color={"white"}
               />
 
               {/* <GlowBox position={[1, 5, -8 * item]} args={[2, 0.1, 4]} /> */}
