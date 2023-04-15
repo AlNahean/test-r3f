@@ -7,7 +7,6 @@ import {
   Environment,
   useGLTF,
   Image,
-  Clone,
   Gltf,
   ScrollControls,
   useScroll,
@@ -23,8 +22,8 @@ import { Suspense } from "react";
 
 import * as THREE from "three";
 
-import studio from "@theatre/studio";
-import extension from "@theatre/r3f/dist/extension";
+// import studio from "@theatre/studio";
+// import extension from "@theatre/r3f/dist/extension";
 
 import { LayerMaterial, Depth } from "lamina";
 
@@ -118,30 +117,6 @@ const BillBoardsData = [
   },
   {
     id: 9,
-    distance: 6,
-  },
-  {
-    id: 10,
-    distance: 6,
-  },
-  {
-    id: 11,
-    distance: 0,
-  },
-  {
-    id: 12,
-    distance: 2,
-  },
-  {
-    id: 13,
-    distance: 4,
-  },
-  {
-    id: 14,
-    distance: 6,
-  },
-  {
-    id: 15,
     distance: 6,
   },
 ];
@@ -273,7 +248,9 @@ const Test = () => {
     return 1 - Math.cos((x * Math.PI) / 2);
   }
   useEffect(() => {
+    console.log(ref);
     if (ref.current) {
+      alert("ww");
       const lenis = new Lenis({
         duration: 2.5,
         // easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -300,11 +277,10 @@ const Test = () => {
 
       <Suspense fallback={<div>Loading.....</div>}>
         <Canvas
-          ref={ref}
           gl={{ preserveDrawingBuffer: true }}
           style={{ height: "100vh", width: "100%", backgroundColor: "black" }}
         >
-          <fog attach="fog" args={["#202025", 0, 80]} />
+          {/* <fog attach="fog" args={["#202025", 0, 80]} /> */}
           {/* <OrbitControls /> */}
           {/* <color attach="background" color="red" /> */}
 
@@ -315,11 +291,16 @@ const Test = () => {
           <Bloom luminanceThreshold={0} luminanceSmoothing={0.9} height={300} />
         </EffectComposer> */}
 
-          <ScrollControls pages={5} infinite={true} damping={0}>
-            <SheetProvider sheet={sheet}>
+          <ScrollControls
+            pages={5}
+            infinite={true}
+            damping={0}
+            children={ref.current}
+          >
+            <SheetProvider sheet={sheet} ref={ref}>
               <Scene />
-              <GlowBox position={[7, 0, 0]} args={[0.2, 0.2, 400]} />
-              <GlowBox position={[-7, 0, 0]} args={[0.2, 0.2, 400]} />
+              {/* <GlowBox position={[7, 0, 0]} args={[0.2, 0.2, 400]} />
+              <GlowBox position={[-7, 0, 0]} args={[0.2, 0.2, 400]} /> */}
             </SheetProvider>
           </ScrollControls>
         </Canvas>
@@ -336,6 +317,8 @@ function Scene() {
   const isChanging = useRef();
   const sheet = useCurrentSheet();
   const scroll = useScroll();
+
+  const scrolling = useRef(false);
   // scroll.curve(1 / 3, 1 / 3);
   // our callback will run on every animation frame
   useFrame(() => {
@@ -369,6 +352,17 @@ function Scene() {
     // } else {
     //   sheet.sequence.position = scroll.offset * sequenceLength;
     // }
+    // if (scroll.offset < 0.05) {
+    //   scrolling.current = true;
+    //   // scroll.offset = 0.05;
+    //   if (!scrolling.current) {
+    //     scroll.el.scrollTo({
+    //       top: 100,
+    //       // behavior: "instant",
+    //       // behavior: "instant",
+    //     });
+    //   }
+    // }
     sheet.sequence.position = scroll.offset * sequenceLength;
   });
 
@@ -376,7 +370,7 @@ function Scene() {
 
   useFrame(({ camera }) => {
     // console.log(cubeCamera.current);
-    cubeCamera.current.position.z = camera.position.z;
+    // cubeCamera.current.position.z = camera.position.z;
   });
 
   return (
@@ -392,9 +386,9 @@ function Scene() {
         <BillBOardGroup />
       </Suspense>
 
-      <Ground />
+      {/* <Ground /> */}
 
-      <group ref={cubeCamera}>
+      {/* <group ref={cubeCamera}>
         <CubeCamera
           resolution={256}
           frames={Infinity}
@@ -406,9 +400,9 @@ function Scene() {
             </>
           )}
         </CubeCamera>
-      </group>
+      </group> */}
 
-      {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15].map((item) => {
+      {[0, 1, 2, 3, 4, 5, 6, 7].map((item) => {
         const ref = useRef(null);
 
         useFrame((state, delta) => {
